@@ -1,5 +1,8 @@
 package com.kata.tennis;
 
+import java.sql.SQLOutput;
+import java.util.Random;
+
 /**
  * Represents a simulation of a simplified Tennis game (one game)
  */
@@ -15,12 +18,19 @@ public class Game {
     /**
      * Decides who wins a point
      */
-    public void decideAPointWinner() {
-        //to complete : proba?
+    public Player[] decideAPointWinner(double probaPlayer1WinsPoint) {
+        Random ramdom = new Random();
+        Player[] winnerLoser = new Player[]{player1, player2};
+        if (ramdom.nextDouble() >= probaPlayer1WinsPoint) {
+            winnerLoser[0] = player2;
+            winnerLoser[1] = player1;
+        }
+        return winnerLoser;
     }
 
     /**
      * Decides if game is over, a player won
+     *
      * @return boolean true if game is over
      */
     public boolean gameOver() {
@@ -30,8 +40,14 @@ public class Game {
     /**
      * Game loop
      */
-    public void startGame() {
-        //to do
+    public void startGame(double probaPlayer1WinsPoint) {
+        while (!gameOver()) {
+            Player[] winnerLoser = decideAPointWinner(probaPlayer1WinsPoint);
+            Player winner = winnerLoser[0];
+            Player loser = winnerLoser[1];
+            winner.winsPoint();
+            loser.losesPoint();
+        }
     }
 
     public Player getPlayer1() {
