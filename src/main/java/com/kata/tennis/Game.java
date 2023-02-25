@@ -1,12 +1,12 @@
 package com.kata.tennis;
 
-import java.sql.SQLOutput;
+import java.util.Observable;
 import java.util.Random;
 
 /**
  * Represents a simulation of a simplified Tennis game (one game)
  */
-public class Game {
+public class Game extends Observable{
     private Player player1;
     private Player player2;
 
@@ -18,14 +18,13 @@ public class Game {
     /**
      * Decides who wins a point
      */
-    public Player[] decideAPointWinner(double probaPlayer1WinsPoint) {
+    public Player decideAPointWinner(double probaPlayer1WinsPoint) {
         Random ramdom = new Random();
-        Player[] winnerLoser = new Player[]{player1, player2};
+        Player winner = player1;
         if (ramdom.nextDouble() >= probaPlayer1WinsPoint) {
-            winnerLoser[0] = player2;
-            winnerLoser[1] = player1;
+            winner = player2;
         }
-        return winnerLoser;
+        return winner;
     }
 
     /**
@@ -38,15 +37,27 @@ public class Game {
     }
 
     /**
+     * Returns the winner
+     * @param player1
+     * @param player2
+     * @return
+     */
+    public Player getGameWinner(Player player1, Player player2) {
+        if (player1.winsGame(player2)){
+            return player1;
+        }
+        return player2;
+    }
+
+    /**
      * Game loop
      */
     public void startGame(double probaPlayer1WinsPoint) {
         while (!gameOver()) {
-            Player[] winnerLoser = decideAPointWinner(probaPlayer1WinsPoint);
-            Player winner = winnerLoser[0];
-            Player loser = winnerLoser[1];
+            Player winner = decideAPointWinner(probaPlayer1WinsPoint);
             winner.winsPoint();
-            loser.losesPoint();
+            setChanged();
+            notifyObservers(this);
         }
     }
 

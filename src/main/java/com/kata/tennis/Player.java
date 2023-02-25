@@ -1,7 +1,5 @@
 package com.kata.tennis;
 
-import java.util.ArrayList;
-
 import static com.kata.tennis.Constants.*;
 
 /**
@@ -15,10 +13,9 @@ public class Player {
      */
     private int points = 0;
 
-    /**
-     * contains the player score (points) after every point won or losed
-     */
-    private ArrayList<Integer> scoreList = new ArrayList<>();
+    public Player(String name) {
+        this.name = name;
+    }
 
     /**
      * Adds a point to the score whenever the player wins a game
@@ -26,14 +23,6 @@ public class Player {
      */
     public void winsPoint() {
         points++;
-        scoreList.add(points);
-    }
-
-    /**
-     * Add the new score to the score list without incrementing
-     */
-    public void losesPoint() {
-        scoreList.add(points);
     }
 
     /**
@@ -67,12 +56,5 @@ public class Player {
     public void setPoints(int points) {
         this.points = points;
     }
-
-    public ArrayList<Integer> getScoreList() {
-        return scoreList;
-    }
-
-    public void setScoreList(ArrayList<Integer> scoreList) {
-        this.scoreList = scoreList;
-    }
 }
+

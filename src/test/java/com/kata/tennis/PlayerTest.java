@@ -3,37 +3,20 @@ package com.kata.tennis;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 class PlayerTest {
 
     @Test
     void winsPoint() {
-        Player player = new Player();
-        ArrayList<Integer> scoresList = new ArrayList<>(Arrays.asList(0, 1, 2));
+        Player player = new Player("A");
         player.setPoints(2);
-        player.setScoreList(scoresList);
         player.winsPoint();
         Assertions.assertEquals(3, player.getPoints());
-        Assertions.assertEquals(3, player.getScoreList().get(3));
-    }
-
-    @Test
-    void losesPoint() {
-        Player player = new Player();
-        ArrayList<Integer> scoresList = new ArrayList<>(Arrays.asList(0, 1, 2));
-        player.setPoints(2);
-        player.setScoreList(scoresList);
-        player.losesPoint();
-        Assertions.assertEquals(2, player.getPoints());
-        Assertions.assertEquals(2, player.getScoreList().get(3));
     }
 
     @Test
     void hasAdvantage() {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = new Player("A");
+        Player player2 = new Player("B");
 
         //case 1: player 1 has advantage
         player1.setPoints(5);
@@ -53,8 +36,8 @@ class PlayerTest {
 
     @Test
     void winsGame() {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = new Player("A");
+        Player player2 = new Player("B");
 
         //case 1: player1 wins the game
         player1.setPoints(7);

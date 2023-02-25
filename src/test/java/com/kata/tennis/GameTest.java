@@ -3,28 +3,25 @@ package com.kata.tennis;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 class GameTest {
 
     @Test
     void decideAPointWinner() {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = new Player("A");
+        Player player2 = new Player("B");
         Game game = new Game(player1, player2);
 
         //case 1: player 1 wins the point for sure
-        Assertions.assertEquals(player1, game.decideAPointWinner(1)[0]);
+        Assertions.assertEquals(player1, game.decideAPointWinner(1));
 
         //case 1: player 2 wins the point for sure
-        Assertions.assertEquals(player2, game.decideAPointWinner(0)[0]);
+        Assertions.assertEquals(player2, game.decideAPointWinner(0));
     }
 
     @Test
     void gameOver() {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = new Player("A");
+        Player player2 = new Player("B");
         Game game = new Game(player1, player2);
 
         //case 1: Game is Over player 1 won
@@ -40,31 +37,40 @@ class GameTest {
 
     @Test
     void startGame() {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = new Player("A");
+        Player player2 = new Player("B");
         Game game1 = new Game(player1, player2);
 
         //case 1: Player 1 wins the game for sure
-        ArrayList expectedScoresPlayer1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-        ArrayList expectedScoresPlayer2 = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
         game1.startGame(1);
         Assertions.assertTrue(player1.winsGame(player2));
         Assertions.assertEquals(0, player2.getPoints());
         Assertions.assertEquals(4, player1.getPoints());
-        Assertions.assertEquals(expectedScoresPlayer1, player1.getScoreList());
-        Assertions.assertEquals(expectedScoresPlayer2, player2.getScoreList());
 
         //case 1: Player 2 wins the game for sure
-        Player player3 = new Player();
-        Player player4 = new Player();
+        Player player3 = new Player("A");
+        Player player4 = new Player("B");
         Game game2 = new Game(player3, player4);
-        ArrayList expectedScoresPlayer4 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-        ArrayList expectedScoresPlayer3 = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
         game2.startGame(0.0);
         Assertions.assertTrue(player4.winsGame(player3));
         Assertions.assertEquals(0, player3.getPoints());
         Assertions.assertEquals(4, player4.getPoints());
-        Assertions.assertEquals(expectedScoresPlayer3, player3.getScoreList());
-        Assertions.assertEquals(expectedScoresPlayer4, player4.getScoreList());
+    }
+
+    @Test
+    void getGameWinner() {
+        //case 1: Player 1 wins the game for sure
+        Player player1 = new Player("A");
+        Player player2 = new Player("B");
+        Game game1 = new Game(player1, player2);
+        game1.startGame(1);
+        Assertions.assertEquals(player1, game1.getGameWinner(player1, player2));
+
+        //case 1: Player 2 wins the game for sure
+        Player player3 = new Player("A");
+        Player player4 = new Player("B");
+        Game game2 = new Game(player3, player4);
+        game2.startGame(0.0);
+        Assertions.assertEquals(player4, game1.getGameWinner(player3, player4));
     }
 }
