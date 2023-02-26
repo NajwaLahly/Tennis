@@ -5,23 +5,32 @@ import java.util.Random;
 
 /**
  * Represents a simulation of a simplified Tennis game (one game)
+ *
  */
 public class Game extends Observable{
     private Player player1;
     private Player player2;
 
+    /**
+     *
+     * @param player1
+     * @param player2
+     */
     public Game(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
     }
 
+
     /**
-     * Decides who wins a point
+     * Decide who wins the point
+     * @param probaPlayer1WinsPoint the probability of player 1 winning the point
+     * @return
      */
     public Player decideAPointWinner(double probaPlayer1WinsPoint) {
-        Random ramdom = new Random();
+        Random rng = new Random();
         Player winner = player1;
-        if (ramdom.nextDouble() >= probaPlayer1WinsPoint) {
+        if (rng.nextDouble() >= probaPlayer1WinsPoint) {
             winner = player2;
         }
         return winner;
@@ -40,7 +49,7 @@ public class Game extends Observable{
      * Returns the winner
      * @param player1
      * @param player2
-     * @return
+     * @return the winner of the game
      */
     public Player getGameWinner(Player player1, Player player2) {
         if (player1.winsGame(player2)){
@@ -49,8 +58,10 @@ public class Game extends Observable{
         return player2;
     }
 
+
     /**
      * Game loop
+     * @param probaPlayer1WinsPoint the probability of player 1 winning the point
      */
     public void startGame(double probaPlayer1WinsPoint) {
         while (!gameOver()) {
@@ -65,16 +76,7 @@ public class Game extends Observable{
         return player1;
     }
 
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
     public Player getPlayer2() {
         return player2;
     }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
-    }
-
 }

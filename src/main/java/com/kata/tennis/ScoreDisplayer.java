@@ -3,6 +3,9 @@ package com.kata.tennis;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Displays the game score at each pint
+ */
 public class ScoreDisplayer implements Observer {
 
     /**
@@ -18,8 +21,8 @@ public class ScoreDisplayer implements Observer {
             Game game = (Game) arg;
             Player player1 = game.getPlayer1();
             Player player2 = game.getPlayer2();
-            if(game.gameOver()) {
-                System.out.println("The winner is : " + game.getGameWinner(player1, player2).getName());
+            if (game.gameOver()) {
+                System.out.println("The winner is: " + game.getGameWinner(player1, player2).getName());
             } else {
                 System.out.println(player1.getName() + " : " + pointsToTennisScores(player1, player2) + "   ||   " +
                         player2.getName() + " : "  + pointsToTennisScores(player2, player1));
@@ -47,8 +50,6 @@ public class ScoreDisplayer implements Observer {
             default:
                 if (player.hasAdvantage(otherPlayer)) {
                     return "A";
-                } else if (player.winsGame(otherPlayer)) {
-                    return "winner";
                 }
                 return "40";
         }

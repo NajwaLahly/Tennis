@@ -9,6 +9,6 @@ public class Application {
         ScoreDisplayer scoreDisplayer = new ScoreDisplayer();
         Game game = new Game(player1, player2);
         game.addObserver(scoreDisplayer);
-        game.startGame(0.3);
+        game.startGame(0.5);
     }
 }

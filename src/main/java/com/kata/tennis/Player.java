@@ -13,6 +13,9 @@ public class Player {
      */
     private int points = 0;
 
+    /**
+      * @param name name of the player
+     */
     public Player(String name) {
         this.name = name;
     }
@@ -43,10 +46,6 @@ public class Player {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getPoints() {
