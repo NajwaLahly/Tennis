@@ -31,6 +31,7 @@ class ScoreDisplayerTest {
         String expectedOutput = "A : 30   ||   B : 15";
         assertEquals(expectedOutput, consoleOutput.trim());
     }
+
     @Test
     void updateCasePlayer1Wins() {
         ScoreDisplayer scoreDisplayer = new ScoreDisplayer();

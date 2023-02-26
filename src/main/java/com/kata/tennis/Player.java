@@ -14,7 +14,7 @@ public class Player {
     private int points = 0;
 
     /**
-      * @param name name of the player
+     * @param name name of the player
      */
     public Player(String name) {
         this.name = name;

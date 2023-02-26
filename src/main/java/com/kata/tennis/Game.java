@@ -5,14 +5,12 @@ import java.util.Random;
 
 /**
  * Represents a simulation of a simplified Tennis game (one game)
- *
  */
-public class Game extends Observable{
+public class Game extends Observable {
     private Player player1;
     private Player player2;
 
     /**
-     *
      * @param player1
      * @param player2
      */
@@ -24,10 +22,14 @@ public class Game extends Observable{
 
     /**
      * Decide who wins the point
+     *
      * @param probaPlayer1WinsPoint the probability of player 1 winning the point
      * @return
      */
-    public Player decideAPointWinner(double probaPlayer1WinsPoint) {
+    public Player decideAPointWinner(double probaPlayer1WinsPoint) throws IllegalArgumentException {
+        if (probaPlayer1WinsPoint < 0.0 || probaPlayer1WinsPoint > 1.0) {
+            throw new IllegalArgumentException("Probability must be between 0.0 and 1.0");
+        }
         Random rng = new Random();
         Player winner = player1;
         if (rng.nextDouble() >= probaPlayer1WinsPoint) {
@@ -47,12 +49,13 @@ public class Game extends Observable{
 
     /**
      * Returns the winner
+     *
      * @param player1
      * @param player2
      * @return the winner of the game
      */
     public Player getGameWinner(Player player1, Player player2) {
-        if (player1.winsGame(player2)){
+        if (player1.winsGame(player2)) {
             return player1;
         }
         return player2;
@@ -61,6 +64,7 @@ public class Game extends Observable{
 
     /**
      * Game loop
+     *
      * @param probaPlayer1WinsPoint the probability of player 1 winning the point
      */
     public void startGame(double probaPlayer1WinsPoint) {
